@@ -1,7 +1,14 @@
+//adopted and modified from code given by textbook solution
+//added anonymous class of mouselistener to enable barframe as controller
+
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
+
 import java.util.*;
 
 /**
@@ -57,6 +64,71 @@ public class BarFrame extends JFrame implements ChangeListener
          }
       };
 
+     //anonymous class for mouselistener
+     this.addMouseListener(new MouseListener()
+     {
+    	 public void mousePressed(MouseEvent e)
+    	 {
+    		 int location = 0;
+    		 double value = 0;
+    		 double x = e.getX();
+    		 double y =  e.getY();
+    		 //0-49
+    		 if (y < ICON_HEIGHT/4)
+    		 {
+    			 location = 0;
+    		 }
+    		 //50-100
+    		 else if (y >= ICON_HEIGHT/4 && y <= ICON_HEIGHT/2)
+    		 {
+    			 location = 1;
+    		 }
+    		 //151-200
+    		 else if (y > (3 * ICON_HEIGHT) /4)
+    		 {
+    		     location = 3;
+    		 }
+    		 //101-150
+    		else
+    		 {
+    			 location = 2;
+    		 }
+    			
+    		double proportion = ICON_WIDTH/x;
+    		double max =  (a.get(0)).doubleValue();
+    	    for (Double v : a)
+    	    {
+    	        double val = v.doubleValue();
+                if (val > max)
+                {
+    	            max = val;
+    	        }
+    	    }
+    		value = Math.ceil(max/proportion);
+    		dataModel.update(location, value);
+    	}
+
+			public void mouseClicked(MouseEvent e) 
+			{
+				return;
+			}
+
+			public void mouseReleased(MouseEvent e) 
+			{
+				return;
+			}
+
+			public void mouseEntered(MouseEvent e) 
+			{
+				return;
+			}
+
+			public void mouseExited(MouseEvent e) 
+			{
+				return;
+			}
+     });
+     
       add(new JLabel(barIcon));
 
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,9 +146,11 @@ public class BarFrame extends JFrame implements ChangeListener
       repaint();
    }
 
+
    private ArrayList<Double> a;
    private DataModel dataModel;
 
    private static final int ICON_WIDTH = 200;
    private static final int ICON_HEIGHT = 200;
+
 }
