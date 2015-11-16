@@ -1,3 +1,5 @@
+//adopted and modified code from textbook solution
+
 import java.util.ArrayList;
 
 /**
@@ -25,5 +27,7 @@ public class ObserverTester
       BarFrame barFrame = new BarFrame(model);
 
       model.attach(barFrame);
+      //attached frame (as change listener) to model 
+      model.attach(frame);
    }
 }
