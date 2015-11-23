@@ -15,19 +15,22 @@ public class CalTable extends JPanel implements ChangeListener
     private int selectedRow    = 0;
     private int selectedColumn = 0;
 
-    public CalTable(MyCalendar c)
+    public CalTable(MyCalendar cal)
     {
-        this.c = c;
+        this.c = cal;
         mo = new MonthTable(stuff, columnNames, c);
         mo.setCellSelectionEnabled(true);
 
         today = c.getToday().get(Calendar.DAY_OF_MONTH);
         System.out.println("caltable: " + today);
-        int max = c.getToday().getActualMaximum(Calendar.DAY_OF_MONTH);
+        c.getToday().set(Calendar.DAY_OF_MONTH, c.getToday().getActualMinimum(Calendar.DAY_OF_MONTH));
         int space = c.getToday().get(Calendar.DAY_OF_WEEK) - 1;
+        c.getToday().set(Calendar.DAY_OF_MONTH, today);
+        int max = c.getToday().getActualMaximum(Calendar.DAY_OF_MONTH);
         System.out.println(space);
         int m = 0;
         int i = 1;
+
 
 
         for(int k = 0; k < stuff[0].length; k++)
