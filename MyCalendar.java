@@ -80,7 +80,7 @@ public class MyCalendar
     private MyCalendar()
     {
         today = new GregorianCalendar();
-        setEvents(new TreeMap<>());
+        events = new TreeMap<>();
         listeners = new ArrayList<>();
     }
 
@@ -118,108 +118,6 @@ public class MyCalendar
         }
 
     }
-
-    /**
-     * Gets all the events that the calendar includes
-     *
-     * @return a sortedmap containing dates with their corresponds events
-     */
-    public SortedMap<GregorianCalendar, ArrayList<Event>> getEvents()
-    {
-        return this.events;
-    }
-
-    /**
-     * Adds an event to the calendar and sorts by date and time
-     *
-     * @param e the event to add to
-     * @precondition e != null
-     * @postcondition the event is added to the calendar
-     */
-    public void addEvent(Event e)
-    {
-        GregorianCalendar realDate = e.getDate();
-        ArrayList<Event> eventsOfDay = null;
-        if(!events.containsKey(realDate))
-        {
-            eventsOfDay = new ArrayList<>();
-            eventsOfDay.add(e);
-            events.put(realDate, eventsOfDay);
-        }
-        else
-        {
-            eventsOfDay = events.get(realDate);
-            eventsOfDay.add(e);
-
-            int i = eventsOfDay.size() - 2;
-            int inputHour = Integer.parseInt(e.getStartTime().substring(0, 2));
-            int inputMinute = Integer.parseInt(e.getStartTime().substring(3, 5));
-            int existingHour = Integer.parseInt(eventsOfDay.get(i).getStartTime().substring(0, 2));
-            int existingMinute = Integer.parseInt(eventsOfDay.get(i).getStartTime().substring(3, 5));
-
-            while(inputHour < existingHour && i > 0)
-            {
-                i--;
-                existingHour = Integer.parseInt(eventsOfDay.get(i).getStartTime().substring(0, 2));
-            }
-            Event p = eventsOfDay.get(eventsOfDay.size() - 1);
-            eventsOfDay.remove(eventsOfDay.size() - 1);
-            if(inputHour < existingHour)
-            {
-
-                eventsOfDay.add(0, p);
-
-            }
-            else if(inputHour == existingHour)
-            {
-                if(inputMinute < existingMinute)
-                {
-                    events.get(realDate).add(i, p);
-                }
-                else
-                {
-                    events.get(realDate).add(i + 1, p);
-                }
-            }
-            else if(inputHour > existingHour)
-            {
-                events.get(realDate).add(i + 1, p);
-            }
-
-        }
-
-    }
-
-    /**
-     * Sets the events maps to a specific map
-     *
-     * @param events the event maps to set to
-     * @precondition events != null
-     * @postcondition the map containing events is set to events
-     */
-    public void setEvents(SortedMap<GregorianCalendar, ArrayList<Event>> events)
-    {
-        this.events = events;
-    }
-
-
-    /**
-     * Gets the CalendarPrinter associated with this calendar
-     * @return a CalendarPrinter
-     */
-//	public CalendarPrinter getP() {
-//		return p;
-//	}
-
-    /**
-     * Sets the CalendarPrinter associated with this calendar
-     * @param p the CalendarPrinter object to set to
-     * @precondition p != null
-     * @postcondition the CalendarPrinter associated with this calendar is set to p
-     */
-//	public void setP(CalendarPrinter p) {
-//		this.p = p;
-//	}
 
     /**
      * Resets the calendar after it has been modified
