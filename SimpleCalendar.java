@@ -28,7 +28,6 @@ public class SimpleCalendar
         EventModel m = new EventModel();
         MyCalendar c = new MyCalendar();
 
-
         MyCalendar cal = new MyCalendar();
         CalTable calTable = new CalTable(cal);
         frame.add(calTable, BorderLayout.WEST);
@@ -44,31 +43,9 @@ public class SimpleCalendar
         label.setHorizontalAlignment(JLabel.CENTER);
         JTextArea sched = new JTextArea(15, 20);
 
-        ChangeListener l = new ChangeListener()
-        {
-
-            @Override
-            public void stateChanged(ChangeEvent e)
-            {
-                System.out.println("todaymonth" + c.getToday().get(Calendar.MONTH));
-
-
-                int month = c.getToday().get(Calendar.MONTH);
-                int day = c.getToday().get(Calendar.DAY_OF_MONTH);
-                int year = c.getToday().get(Calendar.YEAR);
-                GregorianCalendar g = new GregorianCalendar(year, month, day);
-                //System.out.println();
-                System.out.println("gmonth " + g.get(Calendar.MONTH));
-                //sched.setText(m.getEvents().get(c.getToday()).toString());
-                label.setText(days[c.getToday().get(Calendar.DAY_OF_WEEK) - 1] + " " + (c.getToday().get(Calendar.MONTH) + 1) + "/"
-                              + c.getToday().get(Calendar.DAY_OF_MONTH));
-                sched.setText(m.getAllEvents(g));
-                p.repaint();
-
-            }
+        ChangeListener l = (event) -> {
 
         };
-
 
         p.add(label); //, BorderLayout.NORTH);
         p.add(sched); //, BorderLayout.CENTER);

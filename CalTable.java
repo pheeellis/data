@@ -12,15 +12,14 @@ public class CalTable extends JPanel implements ChangeListener
     private MyCalendar c;
     static  int        today;
 
-    private int selectedrow    = 0;
-    private int selectedcolumn = 0;
+    private int selectedRow    = 0;
+    private int selectedColumn = 0;
 
     public CalTable(MyCalendar c)
     {
         this.c = c;
         mo = new MonthTable(stuff, columnNames, c);
         mo.setCellSelectionEnabled(true);
-
 
         today = c.getToday().get(Calendar.DAY_OF_MONTH);
         System.out.println("caltable: " + today);
@@ -52,8 +51,8 @@ public class CalTable extends JPanel implements ChangeListener
             {
 //				mo.setRowSelectionInterval(1, 1);
 //				mo.setColumnSelectionInterval(p,p);
-                selectedrow = 1;
-                selectedcolumn = p;
+                selectedRow = 1;
+                selectedColumn = p;
             }
 
         }
@@ -73,8 +72,8 @@ public class CalTable extends JPanel implements ChangeListener
                     {
 //						mo.setRowSelectionInterval(j, j);
 //						mo.setColumnSelectionInterval(k,k);
-                        selectedrow = j;
-                        selectedcolumn = k;
+                        selectedRow = j;
+                        selectedColumn = k;
                     }
                     i++;
                 }
@@ -82,7 +81,7 @@ public class CalTable extends JPanel implements ChangeListener
             }
 
         }
-        changeSelection(selectedrow, selectedcolumn);
+        changeSelection(selectedRow, selectedColumn);
         add(mo);
 
     }
@@ -106,8 +105,8 @@ public class CalTable extends JPanel implements ChangeListener
 
     public void changeSelection(int row, int col)
     {
-        selectedrow = row;
-        selectedcolumn = col;
+        selectedRow = row;
+        selectedColumn = col;
         mo.setRowSelectionInterval(row, row);
         mo.setColumnSelectionInterval(col, col);
     }
@@ -121,11 +120,11 @@ public class CalTable extends JPanel implements ChangeListener
         System.out.println("todayChanged:" + today);
         if(today - c.getToday().get(Calendar.DAY_OF_MONTH) >= 0)
         {
-            changeSelection(selectedrow, selectedcolumn + 1);
+            changeSelection(selectedRow, selectedColumn + 1);
         }
         else if(today - c.getToday().get(Calendar.DAY_OF_MONTH) < 0)
         {
-            changeSelection(selectedrow + 1, selectedcolumn);
+            changeSelection(selectedRow + 1, selectedColumn);
         }
 
         System.out.println("changed: " + c.getToday().get(Calendar.DAY_OF_MONTH));

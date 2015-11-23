@@ -15,18 +15,78 @@ import java.util.*;
  */
 public class MyCalendar
 {
+    private static final MyCalendar INSTANCE = new MyCalendar();
 
-    private static GregorianCalendar                              today;
-    private static SortedMap<GregorianCalendar, ArrayList<Event>> events;
+    private GregorianCalendar                              today;
+    private SortedMap<GregorianCalendar, ArrayList<Event>> events;
     private final MONTHS[] months = MONTHS.values();
     private ArrayList<ChangeListener> listeners;
 
-    public MyCalendar()
+    public enum MONTHS
+    {
+        Jan("January"),
+        Feb("February"),
+        Mar("March"),
+        Apr("April"),
+        May("May"),
+        June("June"),
+        July("July"),
+        Aug("August"),
+        Sep("September"),
+        Oct("October"),
+        Nov("November"),
+        Dec("December");
+
+        private String fullMonth;
+
+
+        MONTHS(String month)
+        {
+            fullMonth = month;
+
+        }
+
+        public String toString()
+        {
+            return fullMonth;
+
+        }
+
+    }
+
+    public enum DAYS
+    {
+        Sun("Sunday"),
+        Mon("Monday"),
+        Tue("Tuesday"),
+        Wed("Wednesday"),
+        Thur("Thursday"),
+        Fri("Friday"),
+        Sat("Saturday");
+
+        private String fullDay;
+
+        DAYS(String day)
+        {
+            fullDay = day;
+        }
+
+        public String toString()
+        {
+            return fullDay;
+        }
+    }
+
+    private MyCalendar()
     {
         today = new GregorianCalendar();
-        //	p = new CalendarPrinter();
         setEvents(new TreeMap<>());
         listeners = new ArrayList<>();
+    }
+
+    public static MyCalendar instance()
+    {
+        return INSTANCE;
     }
 
 
@@ -50,7 +110,7 @@ public class MyCalendar
      */
     public void setToday(GregorianCalendar today)
     {
-        MyCalendar.today = today;
+        this.today = today;
         for(ChangeListener l : listeners)
         {
             ChangeEvent e = new ChangeEvent(this);
@@ -64,9 +124,9 @@ public class MyCalendar
      *
      * @return a sortedmap containing dates with their corresponds events
      */
-    public static SortedMap<GregorianCalendar, ArrayList<Event>> getEvents()
+    public SortedMap<GregorianCalendar, ArrayList<Event>> getEvents()
     {
-        return MyCalendar.events;
+        return this.events;
     }
 
     /**
@@ -139,7 +199,7 @@ public class MyCalendar
      */
     public void setEvents(SortedMap<GregorianCalendar, ArrayList<Event>> events)
     {
-        MyCalendar.events = events;
+        this.events = events;
     }
 
 
@@ -186,7 +246,6 @@ public class MyCalendar
     public void previous()
     {
         today.add(Calendar.DAY_OF_MONTH, -1);
-        setToday(today);
         for(ChangeListener l : listeners)
         {
             ChangeEvent e = new ChangeEvent(this);
@@ -197,66 +256,10 @@ public class MyCalendar
     public void next()
     {
         today.add(Calendar.DAY_OF_MONTH, 1);
-        setToday(today);
         for(ChangeListener l : listeners)
         {
             ChangeEvent e = new ChangeEvent(this);
             l.stateChanged(e);
-        }
-    }
-
-    public enum MONTHS
-    {
-        Jan("January"),
-        Feb("February"),
-        Mar("March"),
-        Apr("April"),
-        May("May"),
-        June("June"),
-        July("July"),
-        Aug("August"),
-        Sep("September"),
-        Oct("October"),
-        Nov("November"),
-        Dec("December");
-
-        private String fullMonth;
-
-
-        MONTHS(String month)
-        {
-            fullMonth = month;
-
-        }
-
-        public String toString()
-        {
-            return fullMonth;
-
-        }
-
-    }
-
-    public enum DAYS
-    {
-        Sun("Sunday"),
-        Mon("Monday"),
-        Tue("Tuesday"),
-        Wed("Wednesday"),
-        Thur("Thursday"),
-        Fri("Friday"),
-        Sat("Saturday");
-
-        private String fullDay;
-
-        DAYS(String day)
-        {
-            fullDay = day;
-        }
-
-        public String toString()
-        {
-            return fullDay;
         }
     }
 }
