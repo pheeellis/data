@@ -22,10 +22,10 @@ public class Event
     private String            endTime;
     private GregorianCalendar startTimeG;
     private GregorianCalendar endTimeG;
-    private       String[] months      = {"January", "February", "March", "April", "May", "June", "July",
-                                          "August", "September", "October", "November", "December"};
-    private       DAYS[]   days        = DAYS.values();
-    private final String[] shortMonths = {"Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    private       String[]          months      = {"January", "February", "March", "April", "May", "June", "July",
+                                                   "August", "September", "October", "November", "December"};
+    private       MyCalendar.DAYS[] days        = MyCalendar.DAYS.values();
+    private final String[]          shortMonths = {"Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     public Event(String title, String date, String startTime, String endTime)
     {
@@ -48,6 +48,7 @@ public class Event
 
     /**
      * Gets the title of the Event
+     *
      * @return the title of the event
      */
     public String getTitle()
@@ -58,6 +59,7 @@ public class Event
 
     /**
      * Sets the title of the event
+     *
      * @param title the title of the event to set to
      * @precondition title.length() > 1
      * @postcondition title of event is now set to title
@@ -69,6 +71,7 @@ public class Event
 
     /**
      * Get Date of Event
+     *
      * @return the date of the Event
      */
     public GregorianCalendar getDate()
@@ -78,6 +81,7 @@ public class Event
 
     /**
      * Sets the date of the event
+     *
      * @param date the date to set the event to
      * @precondition date != null
      * @postcondition date of event is now set to date
@@ -90,6 +94,7 @@ public class Event
 
     /**
      * Gets the start time of the event
+     *
      * @return the start time of the event
      */
     public String getStartTime()
@@ -100,6 +105,7 @@ public class Event
 
     /**
      * Set the start time of the event
+     *
      * @param startTime the time to set the event to start at
      * @precondition startTime.length() > 0
      * @postcondition the start time of the event is now set to startTime
@@ -111,6 +117,7 @@ public class Event
 
     /**
      * Gets the end time of the event
+     *
      * @return the end time of the event
      */
     public String getEndTime()
@@ -120,6 +127,7 @@ public class Event
 
     /**
      * Sets the end time of the event
+     *
      * @param endTime the end time of the event to set to
      * @precondition endTime.length() > 1
      * @postcondition the end time of the event is now set to endTime
@@ -131,6 +139,7 @@ public class Event
 
     /**
      * Returns a string containing information about the event
+     *
      * @param a string containing information about the specific event
      */
     public String toString()
@@ -149,6 +158,7 @@ public class Event
 
     /**
      * Gets the day of the Event
+     *
      * @return a string containing the day of the event
      */
     public String getDay()
@@ -158,6 +168,7 @@ public class Event
 
     /**
      * Gets the name of the month of the event
+     *
      * @return a string containing the month of the event
      */
     public String getMonthName()
@@ -167,6 +178,7 @@ public class Event
 
     /**
      * Gets the date of the event
+     *
      * @return a string containing the exact numeric date of the event
      */
     public String getDateNumber()
@@ -176,6 +188,7 @@ public class Event
 
     /**
      * Gets the year of the event
+     *
      * @return a string containing the year of which the event takes place
      */
     public String getYear()
@@ -185,6 +198,7 @@ public class Event
 
     /**
      * Prints in a specific format for the file events.txt
+     *
      * @return a string containing information about the event formatted in a specific way
      */
     public String printForFile()
@@ -200,6 +214,7 @@ public class Event
 
     /**
      * Formats the date into MM/dd/yyyy for the date of the event
+     *
      * @param calendar the calendar to set the dates in this format
      * @return a string containing the date in MM/dd/yyyy form
      * @precondition calendar != null

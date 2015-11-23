@@ -9,8 +9,8 @@ public class EventModel
 
     public EventModel()
     {
-        setEvents(new TreeMap<GregorianCalendar, ArrayList<Event>>());
-        setListeners(new ArrayList<ChangeListener>());
+        this.events = new TreeMap<GregorianCalendar, ArrayList<Event>>();
+        this.listeners = new ArrayList<>();
     }
 
     //load

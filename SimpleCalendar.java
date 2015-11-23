@@ -13,7 +13,7 @@ public class SimpleCalendar
     public static void main(String[] args)
     {
 
-        DAYS[] days = DAYS.values();
+        MyCalendar.DAYS[] days = MyCalendar.DAYS.values();
         JFrame frame = new JFrame();
         frame.setSize(1000, 500);
         JButton create = new JButton("CREATE");

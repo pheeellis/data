@@ -18,7 +18,7 @@ public class DayView extends JPanel implements ChangeListener
         this.c = c;
         this.em = e;
 
-        DAYS[] days = DAYS.values();
+        MyCalendar.DAYS[] days = MyCalendar.DAYS.values();
 
 
         String dayString = days[c.getToday().get(Calendar.DAY_OF_WEEK) - 1].toString();

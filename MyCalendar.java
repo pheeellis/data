@@ -10,61 +10,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.*;
 
-enum MONTHS
-{
-    Jan("January"),
-    Feb("February"),
-    Mar("March"),
-    Apr("April"),
-    May("May"),
-    June("June"),
-    July("July"),
-    Aug("August"),
-    Sep("September"),
-    Oct("October"),
-    Nov("November"),
-    Dec("December");
-
-    private String fullMonth;
-
-
-    private MONTHS(String month)
-    {
-        fullMonth = month;
-
-    }
-
-    public String toString()
-    {
-        return fullMonth;
-
-    }
-
-}
-
-enum DAYS
-{
-    Sun("Sunday"),
-    Mon("Monday"),
-    Tue("Tuesday"),
-    Wed("Wednesday"),
-    Thur("Thursday"),
-    Fri("Friday"),
-    Sat("Saturday");
-
-    private String fullDay;
-
-    DAYS(String day)
-    {
-        fullDay = day;
-    }
-
-    public String toString()
-    {
-        return fullDay;
-    }
-}
-
 /**
  * A class the simulates a Calendar with multiple events
  */
@@ -88,6 +33,7 @@ public class MyCalendar
 
     /**
      * Prints today's calendar
+     *
      * @param c the calendar that has information on today
      * @precondition c != null
      */
@@ -99,6 +45,7 @@ public class MyCalendar
 
     /**
      * Gets the calendar that corresponds to today
+     *
      * @return the calendar that corresponds to today
      */
     public GregorianCalendar getToday()
@@ -109,6 +56,7 @@ public class MyCalendar
 
     /**
      * Sets the calendar that corresponds to today to a specific calendar
+     *
      * @param today the calendar to set to
      * @precondition today != null
      * @postcondition the calendar that corresponds to today is set to today
@@ -126,6 +74,7 @@ public class MyCalendar
 
     /**
      * Gets all the events that the calendar includes
+     *
      * @return a sortedmap containing dates with their corresponds events
      */
     public static SortedMap<GregorianCalendar, ArrayList<Event>> getEvents()
@@ -135,6 +84,7 @@ public class MyCalendar
 
     /**
      * Adds an event to the calendar and sorts by date and time
+     *
      * @param e the event to add to
      * @precondition e != null
      * @postcondition the event is added to the calendar
@@ -195,6 +145,7 @@ public class MyCalendar
 
     /**
      * Sets the events maps to a specific map
+     *
      * @param events the event maps to set to
      * @precondition events != null
      * @postcondition the map containing events is set to events
@@ -225,7 +176,8 @@ public class MyCalendar
 
     /**
      * Resets the calendar after it has been modified
-     *@postcondition the calendar returns back to its initial today date
+     *
+     * @postcondition the calendar returns back to its initial today date
      */
     public void resetCal()
     {
@@ -263,6 +215,61 @@ public class MyCalendar
         {
             ChangeEvent e = new ChangeEvent(this);
             l.stateChanged(e);
+        }
+    }
+
+    public enum MONTHS
+    {
+        Jan("January"),
+        Feb("February"),
+        Mar("March"),
+        Apr("April"),
+        May("May"),
+        June("June"),
+        July("July"),
+        Aug("August"),
+        Sep("September"),
+        Oct("October"),
+        Nov("November"),
+        Dec("December");
+
+        private String fullMonth;
+
+
+        MONTHS(String month)
+        {
+            fullMonth = month;
+
+        }
+
+        public String toString()
+        {
+            return fullMonth;
+
+        }
+
+    }
+
+    public enum DAYS
+    {
+        Sun("Sunday"),
+        Mon("Monday"),
+        Tue("Tuesday"),
+        Wed("Wednesday"),
+        Thur("Thursday"),
+        Fri("Friday"),
+        Sat("Saturday");
+
+        private String fullDay;
+
+        DAYS(String day)
+        {
+            fullDay = day;
+        }
+
+        public String toString()
+        {
+            return fullDay;
         }
     }
 }
