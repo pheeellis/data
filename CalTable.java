@@ -133,6 +133,5 @@ public class CalTable extends JPanel implements ChangeListener
 
         mo.revalidate();
         revalidate();
-
     }
 }

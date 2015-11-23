@@ -19,27 +19,14 @@ public class MyCalendar
     private static GregorianCalendar                              today;
     private static SortedMap<GregorianCalendar, ArrayList<Event>> events;
     private final MONTHS[] months = MONTHS.values();
-    //private CalendarPrinter p;
     private ArrayList<ChangeListener> listeners;
 
     public MyCalendar()
     {
         today = new GregorianCalendar();
         //	p = new CalendarPrinter();
-        setEvents(new TreeMap<GregorianCalendar, ArrayList<Event>>());
-        listeners = new ArrayList<ChangeListener>();
-    }
-
-
-    /**
-     * Prints today's calendar
-     *
-     * @param c the calendar that has information on today
-     * @precondition c != null
-     */
-    public void print(Calendar c)
-    {
-//		new CalendarPrinter().printToday(c);
+        setEvents(new TreeMap<>());
+        listeners = new ArrayList<>();
     }
 
 
