@@ -75,7 +75,7 @@ enum DAYS
 public class MyCalendar 
 {
 	
-	private  GregorianCalendar today;
+	private  static GregorianCalendar today;
 	private static SortedMap<GregorianCalendar, ArrayList<Event>> events;
 	private final MONTHS[] months = MONTHS.values();
 	//private CalendarPrinter p;
@@ -83,7 +83,7 @@ public class MyCalendar
 	
 	public MyCalendar()
 	{
-		setToday(new GregorianCalendar());
+		today = new GregorianCalendar();
 	//	p = new CalendarPrinter();
 		setEvents(new TreeMap<GregorianCalendar, ArrayList<Event>>());
 		listeners = new ArrayList<ChangeListener>();
@@ -120,7 +120,12 @@ public class MyCalendar
 	 */
 	public void setToday(GregorianCalendar today) 
 	{
-		this.today = today;
+		MyCalendar.today = today;
+		for (ChangeListener l: listeners)
+		{
+			ChangeEvent e = new ChangeEvent(this);
+			l.stateChanged(e);
+		}
 		
 	}
 
