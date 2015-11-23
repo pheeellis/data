@@ -21,24 +21,14 @@ public class EventModel
         return events;
     }
 
-    public void setEvents(SortedMap<GregorianCalendar, ArrayList<Event>> events)
-    {
-        this.events = events;
-    }
-
-    public ArrayList<ChangeListener> getListeners()
-    {
-        return listeners;
-    }
-
-    public void setListeners(ArrayList<ChangeListener> listeners)
-    {
-        this.listeners = listeners;
-    }
-
     public void addChangeListener(ChangeListener c)
     {
         listeners.add(c);
+    }
+
+    public void clearChangeListeners()
+    {
+        listeners.clear();
     }
 
     public ArrayList<Event> getEvent(GregorianCalendar c)

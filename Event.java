@@ -6,6 +6,7 @@
  * @since 10/10/15
  */
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,7 +15,7 @@ import java.util.GregorianCalendar;
 /**
  * A class the simulates an event with a title, date, and time
  */
-public class Event
+public class Event implements Serializable
 {
     private String            title;
     private GregorianCalendar date;
@@ -22,10 +23,13 @@ public class Event
     private String            endTime;
     private GregorianCalendar startTimeG;
     private GregorianCalendar endTimeG;
-    private       String[]          months      = {"January", "February", "March", "April", "May", "June", "July",
-                                                   "August", "September", "October", "November", "December"};
-    private       MyCalendar.DAYS[] days        = MyCalendar.DAYS.values();
-    private final String[]          shortMonths = {"Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+    private String[]          months = {"January", "February", "March", "April", "May", "June", "July",
+                                        "August", "September", "October", "November", "December"};
+    private MyCalendar.DAYS[] days   = MyCalendar.DAYS.values();
+
+    private final String[] shortMonths = {"Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
 
     public Event(String title, String date, String startTime, String endTime)
     {
@@ -58,18 +62,6 @@ public class Event
     }
 
     /**
-     * Sets the title of the event
-     *
-     * @param title the title of the event to set to
-     * @precondition title.length() > 1
-     * @postcondition title of event is now set to title
-     */
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
-    /**
      * Get Date of Event
      *
      * @return the date of the Event
@@ -78,19 +70,6 @@ public class Event
     {
         return date;
     }
-
-    /**
-     * Sets the date of the event
-     *
-     * @param date the date to set the event to
-     * @precondition date != null
-     * @postcondition date of event is now set to date
-     */
-    public void setDate(GregorianCalendar date)
-    {
-        this.date = date;
-    }
-
 
     /**
      * Gets the start time of the event
@@ -104,18 +83,6 @@ public class Event
 
 
     /**
-     * Set the start time of the event
-     *
-     * @param startTime the time to set the event to start at
-     * @precondition startTime.length() > 0
-     * @postcondition the start time of the event is now set to startTime
-     */
-    public void setStartTime(String startTime)
-    {
-        this.startTime = startTime;
-    }
-
-    /**
      * Gets the end time of the event
      *
      * @return the end time of the event
@@ -126,21 +93,7 @@ public class Event
     }
 
     /**
-     * Sets the end time of the event
-     *
-     * @param endTime the end time of the event to set to
-     * @precondition endTime.length() > 1
-     * @postcondition the end time of the event is now set to endTime
-     */
-    public void setEndTime(String endTime)
-    {
-        this.endTime = endTime;
-    }
-
-    /**
      * Returns a string containing information about the event
-     *
-     * @param a string containing information about the specific event
      */
     public String toString()
     {
@@ -163,7 +116,7 @@ public class Event
      */
     public String getDay()
     {
-        return "" + days[date.get(Calendar.DAY_OF_WEEK) - 1];
+        return String.valueOf(days[date.get(Calendar.DAY_OF_WEEK) - 1]);
     }
 
     /**
@@ -173,7 +126,7 @@ public class Event
      */
     public String getMonthName()
     {
-        return "" + months[date.get(Calendar.MONTH)];
+        return String.valueOf(months[date.get(Calendar.MONTH)]);
     }
 
     /**
@@ -183,7 +136,7 @@ public class Event
      */
     public String getDateNumber()
     {
-        return "" + date.get(Calendar.DAY_OF_MONTH);
+        return String.valueOf(date.get(Calendar.DAY_OF_MONTH));
     }
 
     /**
@@ -193,24 +146,18 @@ public class Event
      */
     public String getYear()
     {
-        return "" + date.get(Calendar.YEAR);
+        return String.valueOf(date.get(Calendar.YEAR));
     }
 
-    /**
-     * Prints in a specific format for the file events.txt
-     *
-     * @return a string containing information about the event formatted in a specific way
-     */
-    public String printForFile()
+    public GregorianCalendar getStartTimeG()
     {
-        String datee = format(date);
-        if(endTime == null)
-        {
-            return String.format(datee + "%n" + this.startTime + "%n" + this.title);
-        }
-        return String.format(datee + "%n" + this.startTime + "-" + this.endTime + "%n" + this.title);
+        return startTimeG;
     }
 
+    public GregorianCalendar getEndTimeG()
+    {
+        return endTimeG;
+    }
 
     /**
      * Formats the date into MM/dd/yyyy for the date of the event
@@ -227,26 +174,4 @@ public class Event
         String dateFormatted = f.format(calendar.getTime());
         return dateFormatted;
     }
-
-    public GregorianCalendar getStartTimeG()
-    {
-        return startTimeG;
-    }
-
-    public void setStartTimeG(GregorianCalendar startTimeG)
-    {
-        this.startTimeG = startTimeG;
-    }
-
-    public GregorianCalendar getEndTimeG()
-    {
-        return endTimeG;
-    }
-
-    public void setEndTimeG(GregorianCalendar endTimeG)
-    {
-        this.endTimeG = endTimeG;
-    }
-
-
 }
