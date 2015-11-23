@@ -15,9 +15,9 @@ public class MonthTable extends JTable
 {
 	private MyCalendar c;
 	
-	public MonthTable(Object[][] data, String[] columnNames, MyCalendar c) {
+	public MonthTable(Object[][] data, String[] columnNames, MyCalendar cal) {
 		super(data, columnNames);
-		this.c = c;
+		this.c = cal;
 		
 		addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
@@ -34,6 +34,8 @@ public class MonthTable extends JTable
 			      frame.setVisible(true);
 			      
 			      c.getToday().set(Calendar.DAY_OF_MONTH, (int) data);
+			      c.setToday(c.getToday());
+			     
 			      System.out.println(c.getToday().get(Calendar.MONTH) + "/" + c.getToday().get(Calendar.DAY_OF_MONTH));
 			    }
 			  }
