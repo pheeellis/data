@@ -19,6 +19,8 @@ public class Event
 	private GregorianCalendar date;
 	private String startTime;
 	private String endTime;
+	private GregorianCalendar startTimeG;
+	private GregorianCalendar endTimeG;
 	private String[] months = {"January", "February", "March", "April", "May", "June", "July",
 			"August", "September", "October", "November", "December" };
 	private DAYS[] days = DAYS.values();
@@ -35,6 +37,14 @@ public class Event
 		this.date = new GregorianCalendar(year, month, actualDate);
 		this.startTime = startTime;
 		this.endTime = endTime;
+		
+		int hour = Integer.parseInt(startTime.substring(0, 2));
+		int min = Integer.parseInt(startTime.substring(3, startTime.length()));
+		startTimeG = new GregorianCalendar(year, month, actualDate, hour, min );
+		
+		int hour1 = Integer.parseInt(endTime.substring(0, 2));
+		int min1 = Integer.parseInt(endTime.substring(3, endTime.length()));
+		endTimeG = new GregorianCalendar(year, month, actualDate, hour1, min1);
 	}
 
 	/**
@@ -195,6 +205,22 @@ public class Event
 	    f.setCalendar(calendar);
 	    String dateFormatted = f.format(calendar.getTime());
 	    return dateFormatted;
+	}
+
+	public GregorianCalendar getStartTimeG() {
+		return startTimeG;
+	}
+
+	public void setStartTimeG(GregorianCalendar startTimeG) {
+		this.startTimeG = startTimeG;
+	}
+
+	public GregorianCalendar getEndTimeG() {
+		return endTimeG;
+	}
+
+	public void setEndTimeG(GregorianCalendar endTimeG) {
+		this.endTimeG = endTimeG;
 	}
 	
 	
