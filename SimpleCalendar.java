@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,7 @@ public class SimpleCalendar
 {
     public static void main(String[] args)
     {
-
+    	MyCalendar.MONTHS[] months = MyCalendar.MONTHS.values();
         MyCalendar.DAYS[] days = MyCalendar.DAYS.values();
         JFrame frame = new JFrame();
         frame.setSize(1000, 500);
@@ -26,11 +27,19 @@ public class SimpleCalendar
         buttons.add(next);
         buttons.add(quit);
         EventModel m = new EventModel();
-        MyCalendar c = new MyCalendar();
+        MyCalendar c =  MyCalendar.instance();
 
-        MyCalendar cal = new MyCalendar();
+        MyCalendar cal =  MyCalendar.instance();
         CalTable calTable = new CalTable(cal);
-        frame.add(calTable, BorderLayout.WEST);
+        
+        JPanel monthView = new JPanel();
+        monthView.setLayout(new BoxLayout(monthView, BoxLayout.PAGE_AXIS));
+      
+        JLabel calendarlabel = new JLabel(months[c.getToday().get(Calendar.MONTH)].toString() + " " + c.getToday().get(Calendar.YEAR));
+        monthView.add(calendarlabel);
+        monthView.add(calTable);
+        frame.add(monthView, BorderLayout.WEST);
+       
 
 
         c.addChangeListener(calTable);
@@ -127,6 +136,33 @@ public class SimpleCalendar
             }
 
         });
+        
+        
+        previous.addActionListener(new ActionListener()
+        {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c.previous();
+				
+			}
+        	
+        });
+        
+        next.addActionListener(new ActionListener()
+        {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c.next();
+				
+			}
+        	
+        });
+        
+        
+        
+        
 
         frame.add(buttons, BorderLayout.NORTH);
         frame.add(p, BorderLayout.CENTER);
