@@ -23,15 +23,8 @@ public class MonthTable extends JTable
                     int row = target.getSelectedRow();
                     int column = target.getSelectedColumn();
                     Object data = target.getModel().getValueAt(row, column);
-                    // do some action if appropriate column
-                    JFrame frame = new JFrame();
-                    frame.setSize(25, 25);
-                    JLabel label = new JLabel(String.valueOf(data));
-                    frame.add(label);
-                    frame.setVisible(true);
 
                     c.getToday().set(Calendar.DAY_OF_MONTH, (int) data);
-                    c.setToday(c.getToday());
 
                     System.out.println(c.getToday().get(Calendar.MONTH) + "/" + c.getToday().get(Calendar.DAY_OF_MONTH));
                 }
